@@ -1,7 +1,7 @@
 
 class NumerosLogica {
 
-  // Verificar si el numero es primo
+  //  es primo
   bool esPrimo(int numero) {
 
     if (numero <= 1) {
@@ -17,7 +17,7 @@ class NumerosLogica {
     return true;
   }
 
-  // Calcular factorial
+  //  factorial
   String calcularFactorial(int numero) {
 
     if (numero < 0) {
@@ -46,7 +46,7 @@ class NumerosLogica {
     return procedimiento;
   }
 
-  // Verificar si es numero capicua
+  // numero capicua
   bool esCapicua(int numero) {
 
     String texto = numero.toString();

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../logica/numeros_logica.dart';
 
 class EjerciciosPantalla extends StatefulWidget {
-  const EjerciciosPantalla({super.key});
+  EjerciciosPantalla({super.key});
 
   @override
   State<EjerciciosPantalla> createState() =>
@@ -23,14 +23,14 @@ class _EjerciciosPantallaState
   String resultadoCapicua = '';
   String mensaje = '';
 
-
+  // Calcular
   void calcular() {
 
     int? numero = int.tryParse(numeroController.text);
 
     if (numero == null) {
       setState(() {
-        mensaje = 'Ingrese un numero entero ';
+        mensaje = 'Ingrese un numero entero';
         resultadoPrimo = '';
         resultadoFactorial = '';
         resultadoCapicua = '';
@@ -75,11 +75,17 @@ class _EjerciciosPantallaState
   }
 
   @override
+  void dispose() {
+    numeroController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
 
       appBar: AppBar(
-        title: const Text('Ejercicios'),
+        title: Text('Ejercicios'),
         centerTitle: true,
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
@@ -87,13 +93,13 @@ class _EjerciciosPantallaState
       ),
 
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(20),
 
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
 
-            const Text(
+            Text(
               'Ingrese un numero entero',
               style: TextStyle(
                 fontSize: 20,
@@ -101,52 +107,51 @@ class _EjerciciosPantallaState
               ),
             ),
 
-            const SizedBox(height: 15),
+            SizedBox(height: 15),
 
             // Campo de texto
             TextField(
               controller: numeroController,
-              keyboardType:
-              const TextInputType.numberWithOptions(
+              keyboardType: TextInputType.numberWithOptions(
                 signed: true,
               ),
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: 'Numero',
                 border: OutlineInputBorder(),
               ),
             ),
 
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
 
             // Boton calcular
             ElevatedButton(
               onPressed: calcular,
-              child: const Text('Calcular'),
+              child: Text('Calcular'),
             ),
 
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
 
             // Boton limpiar
             ElevatedButton(
               onPressed: limpiar,
-              child: const Text('Limpiar'),
+              child: Text('Limpiar'),
             ),
 
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
 
             // Mensaje de validacion
             Text(
               mensaje,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.red,
                 fontSize: 16,
               ),
             ),
 
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
 
             // Resultado primo
-            const Text(
+            Text(
               'NUMERO PRIMO',
               style: TextStyle(
                 fontSize: 18,
@@ -154,17 +159,17 @@ class _EjerciciosPantallaState
               ),
             ),
 
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
 
             Text(
               resultadoPrimo,
-              style: const TextStyle(fontSize: 16),
+              style: TextStyle(fontSize: 16),
             ),
 
-            const Divider(height: 35),
+            Divider(height: 35),
 
             // Resultado factorial
-            const Text(
+            Text(
               'FACTORIAL',
               style: TextStyle(
                 fontSize: 18,
@@ -172,17 +177,17 @@ class _EjerciciosPantallaState
               ),
             ),
 
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
 
             Text(
               resultadoFactorial,
-              style: const TextStyle(fontSize: 16),
+              style: TextStyle(fontSize: 16),
             ),
 
-            const Divider(height: 35),
+            Divider(height: 35),
 
             // Resultado capicua
-            const Text(
+            Text(
               'NUMERO CAPICUA',
               style: TextStyle(
                 fontSize: 18,
@@ -190,21 +195,24 @@ class _EjerciciosPantallaState
               ),
             ),
 
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
 
             Text(
               resultadoCapicua,
-              style: const TextStyle(fontSize: 16),
+              style: TextStyle(fontSize: 16),
             ),
 
-            const SizedBox(height: 30),
+            SizedBox(height: 30),
 
-            // Regresar
+            // Regresar usando el nombre de la ruta
             ElevatedButton(
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.popUntil(
+                  context,
+                  ModalRoute.withName('/bienvenida'),
+                );
               },
-              child: const Text('Volver'),
+              child: Text('Volver'),
             ),
 
           ],
